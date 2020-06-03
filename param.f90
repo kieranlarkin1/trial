@@ -4,7 +4,7 @@ MODULE param
     REAL(8), PARAMETER :: beta=0.99d0
     REAL(8), PARAMETER :: r=0.01d0
 
-    REAL(8), PARAMETER :: gamma=0.5d0
+    REAL(8), PARAMETER :: gamma=0.8d0
     REAL(8), PARAMETER :: omega=1.d0
 
     INTEGER, PARAMETER :: na = 1000
