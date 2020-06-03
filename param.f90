@@ -1,6 +1,6 @@
 MODULE param
 
-    REAL(8), PARAMETER :: alpha=1.5d0       !elasticity of substitution
+    REAL(8), PARAMETER :: alpha=2.d0       !elasticity of substitution
     REAL(8), PARAMETER :: beta=0.99d0
     REAL(8), PARAMETER :: r=0.01d0
 
