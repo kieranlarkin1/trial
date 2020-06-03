@@ -1,4 +1,4 @@
-program main  !Program shell
+PROGRAM main  !Program shell
 
  USE param
 
@@ -47,5 +47,5 @@ IMPLICIT NONE
   WRITE(25,*) pol
   CLOSE(25) 
 
-END FUNCTION main
+END PROGRAM main
 
