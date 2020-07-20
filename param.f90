@@ -1,5 +1,7 @@
 MODULE param
 
+IMPLICIT NONE
+
     REAL(8), PARAMETER :: alpha=2.d0       !elasticity of substitution
     REAL(8), PARAMETER :: beta=0.989d0
     REAL(8), PARAMETER :: r=0.01d0

@@ -1,6 +1,8 @@
 MODULE mod_subrou
 
-REAL(8), PARAMETER :: phi = 2.d0
+IMPLICIT NONE
+
+REAL(8), PARAMETER :: phi = 4.d0
 
 CONTAINS
 
@@ -10,8 +12,9 @@ IMPLICIT NONE
 INTEGER, INTENT(IN) :: n
 REAL(8), DIMENSION(n), INTENT(IN) :: v
 REAL(8), DIMENSION(n), INTENT(OUT) :: out
+REAL(8), PARAMETER :: theta = 2.d0
 
-out = phi * V
+out = (phi/theta) * V
 
 END SUBROUTINE trial_sub
 
