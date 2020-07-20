@@ -8,8 +8,8 @@ MODULE param
     REAL(8), PARAMETER :: omega=1.d0
 
     INTEGER, PARAMETER :: na = 100
-    INTEGER, PARAMETER :: mn_a = 0.d0
-    INTEGER, PARAMETER :: mx_a = 10.d0
+    REAL(8), PARAMETER :: mn_a = 0.d0
+    REAL(8), PARAMETER :: mx_a = 10.d0
 
     INTEGER, PARAMETER :: mx_it = 10000
     REAL(8), PARAMETER :: tol = 1.d-6

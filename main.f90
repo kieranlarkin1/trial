@@ -18,7 +18,9 @@ IMPLICIT NONE
   step = (mx_a-mn_a)/(na-1)
   a = (/ (mn_a+i*step, i = 0, na-1) /)
 
+  WRITE(*,*) ' step: ', step
   WRITE(*,*) ' c, a ',c,a
+
   v = 0.d0
   tv = 0.d0
 
