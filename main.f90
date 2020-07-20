@@ -21,17 +21,17 @@ IMPLICIT NONE
   v = 0.d0
   tv = 0.d0
   c = 0.d0
-  
+
   ! Choose to consume all or gamma share
   DO i=1,na
     DO j=1,na
     c(i,j) = LOG( a(i)*(1.d0+r)+omega-a(j) )
    END DO
   END DO
-
+á
     WRITE(*,*) ' step: ', step
-    WRITE(*,*) ' c(1) ',c(:,1)
-    WRITE(*,*) ' c(1) ',c(:,2)
+    WRITE(*,*) ' c(:,5) ',c(:,5)
+    WRITE(*,*) ' c(5,:) ',c(5,:)
     WRITE(*,*) ' a    ',a
 
   DO t=1,mx_it
@@ -39,7 +39,7 @@ IMPLICIT NONE
       DO j=1,na
       w(j) = c(i,j)+beta*v(j)
       END DO
-      pol(i) = MAXLOC(w(j),1)
+      pol(i) = MAXLOC(w,1)
       tv(i) = w(pol(i))
     END DO
   step = MAXVAL(ABS(tv-v))
