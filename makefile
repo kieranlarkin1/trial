@@ -1,7 +1,7 @@
 # Make file compiler
 
-#FF = gfortran
-FF = ifort
+FF = gfortran
+#FF = ifort
 #silent = @
 silent =
 
