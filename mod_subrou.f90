@@ -1,5 +1,7 @@
 MODULE mod_subrou
 
+use param
+
 IMPLICIT NONE
 
 REAL(8), PARAMETER :: phi = 4.d0
