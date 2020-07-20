@@ -10,9 +10,11 @@ IMPLICIT NONE
   REAL(8), DIMENSION(na) :: v, tv, a, ap, w
   INTEGER, DIMENSION(na) :: pol
   REAL(8), DIMENSION(na,na) :: c
-  REAL(8) :: beta
+  ! REAL(8) :: beta
+  REAL(8) :: phi
 
-  beta = 0.9
+  !beta = 0.9
+  phi = 2.d0
 
   WRITE(*,*) ' HELLO WORLD '
   step = (mx_a-mn_a)/(na-1)
@@ -26,8 +28,8 @@ IMPLICIT NONE
   ! Choose to consume all or gamma share
   DO i=1,na
     DO j=1,na
-    c(i,j) = a(i)*(1.d0+r)+omega-a(j)
-   END DO
+      c(i,j) = a(i)*(1.d0+r)+omega-a(j)
+    END DO
   END DO
 
   DO t=1,mx_it
