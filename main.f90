@@ -33,7 +33,7 @@ IMPLICIT NONE
     DO i=1,na
       DO j=1,na
         IF (c(i,j) .GT. 0.d0) THEN
-          w(j) = c(i,j)+beta*v(j)
+          w(j) = LOG( c(i,j) ) + beta*v(j)
         ELSE
           w(j) = vmin
         END IF
