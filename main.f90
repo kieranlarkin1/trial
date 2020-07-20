@@ -11,10 +11,10 @@ IMPLICIT NONE
   INTEGER, DIMENSION(na) :: pol
   REAL(8), DIMENSION(na,na) :: c
   ! REAL(8) :: beta
-  REAL(8) :: phi
+!  REAL(8) :: phi
 
   !beta = 0.9
-  phi = 2.d0
+!  phi = 2.d0
 
   WRITE(*,*) ' HELLO WORLD '
   step = (mx_a-mn_a)/(na-1)
@@ -53,7 +53,7 @@ IMPLICIT NONE
 
   WRITE(*,*) ' FINISHED! '
   WRITE(*,*) ' iteration: ',i, ' tolerance: ', step
-  WRITE(*,*) ' beta= ', beta, phi
+  WRITE(*,*) ' beta= ', beta, phi, theta
   WRITE(*,*) ' V(0)= ', v0, v(1)
 
   OPEN (UNIT=25, FILE="Output.txt", ACTION="WRITE", POSITION="REWIND")
