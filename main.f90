@@ -8,8 +8,8 @@ IMPLICIT NONE
   INTEGER :: t,i,j
   REAL(8) :: step
   REAL(8), DIMENSION(na) :: v, tv, a, ap, w
-  INTEGER, DIMENSION(na) :: ap_i, pol
-  REAL(8), DIMENSION(na,2) :: c
+  INTEGER, DIMENSION(na) :: pol
+  REAL(8), DIMENSION(na,na) :: c
   ! REAL(8) :: beta
   !
   ! beta = 0.9
@@ -18,28 +18,29 @@ IMPLICIT NONE
   step = (mx_a-mn_a)/(na-1)
   a = (/ (mn_a+i*step, i = 0, na-1) /)
 
-  WRITE(*,*) ' step: ', step
-  WRITE(*,*) ' c, a ',c,a
-
   v = 0.d0
   tv = 0.d0
-
+  c = 0.d0
+  
   ! Choose to consume all or gamma share
   DO i=1,na
-  c(i,1) = LOG(a(i)+omega)
-  c(i,2) = LOG(gamma*a(i)+omega)
-  ap(i) = (1.d0-gamma)*a(i)*(1.d0+r)
-  ap_i(i) = MINLOC( ABS(ap(i)-a), 1 )
+    DO j=1,na
+    c(i,j) = LOG( a(i)*(1.d0+r)+omega-a(j) )
+   END DO
   END DO
+
+    WRITE(*,*) ' step: ', step
+    WRITE(*,*) ' c(1) ',c(:,1)
+    WRITE(*,*) ' c(1) ',c(:,2)
+    WRITE(*,*) ' a    ',a
 
   DO t=1,mx_it
     DO i=1,na
-    tv(i) = MAX(c(i,1), c(i,2)+beta*v(ap_i(i)) )
-      IF ( tv(i) .GT. c(i,1) ) THEN
-      pol(i) = 1
-      ELSE
-      pol(i) = 0
-      END IF
+      DO j=1,na
+      w(j) = c(i,j)+beta*v(j)
+      END DO
+      pol(i) = MAXLOC(w(j),1)
+      tv(i) = w(pol(i))
     END DO
   step = MAXVAL(ABS(tv-v))
   IF (step .LT. tol) EXIT
@@ -50,7 +51,7 @@ IMPLICIT NONE
 
   WRITE(*,*) ' FINISHED! '
   WRITE(*,*) ' iteration: ',i, ' tolerance: ', step
-  WRITE(*,*) ' beta= ', beta, aa
+  WRITE(*,*) ' beta= ', beta, phi
 
   OPEN (UNIT=25, FILE="Output.txt", ACTION="WRITE", POSITION="REWIND")
   WRITE(25,*) ' V ',' POL ',' W '

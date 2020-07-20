@@ -1,6 +1,6 @@
 MODULE mod_subrou
 
-REAL(8), PARAMETER :: aa = 2.d0
+REAL(8), PARAMETER :: phi = 2.d0
 
 CONTAINS
 
@@ -11,7 +11,7 @@ INTEGER, INTENT(IN) :: n
 REAL(8), DIMENSION(n), INTENT(IN) :: v
 REAL(8), DIMENSION(n), INTENT(OUT) :: out
 
-out = aa * V
+out = phi * V
 
 END SUBROUTINE trial_sub
 
