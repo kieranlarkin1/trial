@@ -1,6 +1,7 @@
 PROGRAM main  !Program shell
 
  USE param
+ USE mod_subrou
 
 IMPLICIT NONE
 
@@ -9,6 +10,9 @@ IMPLICIT NONE
   REAL(8), DIMENSION(na) :: v, tv, a, ap
   INTEGER, DIMENSION(na) :: ap_i, pol
   REAL(8), DIMENSION(na,2) :: c
+  ! REAL(8) :: beta
+  !
+  ! beta = 0.9
 
   WRITE(*,*) ' HELLO WORLD '
   step = (mx_a-mn_a)/(na-1)
@@ -39,13 +43,16 @@ IMPLICIT NONE
   v = tv
   END DO
 
+  CALL trial_sub(v,n,out)
+
   WRITE(*,*) ' FINISHED! '
   WRITE(*,*) ' iteration: ',i, ' tolerance: ', step
+  WRITE(*,*) ' beta= ', beta
 
   OPEN (UNIT=25, FILE="Output.txt", ACTION="WRITE", POSITION="REWIND")
   WRITE(25,*) v
   WRITE(25,*) pol
-  CLOSE(25) 
+  WRITE(25,*) out
+  CLOSE(25)
 
 END PROGRAM main
-
