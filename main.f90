@@ -6,7 +6,7 @@ PROGRAM main  !Program shell
 IMPLICIT NONE
 
   INTEGER :: t,i,j
-  REAL(8) :: step
+  REAL(8) :: step, v0
   REAL(8), DIMENSION(na) :: v, tv, a, ap, w
   INTEGER, DIMENSION(na) :: pol
   REAL(8), DIMENSION(na,na) :: c
@@ -18,6 +18,7 @@ IMPLICIT NONE
   step = (mx_a-mn_a)/(na-1)
   a = (/ (mn_a+i*step, i = 0, na-1) /)
 
+  v0 = log(omega)/(1-beta)
   v = 0.d0
   tv = 0.d0
   c = 0.d0
@@ -51,6 +52,7 @@ IMPLICIT NONE
   WRITE(*,*) ' FINISHED! '
   WRITE(*,*) ' iteration: ',i, ' tolerance: ', step
   WRITE(*,*) ' beta= ', beta, phi
+  WRITE(*,*) ' V(0)= ', v0, v(1)
 
   OPEN (UNIT=25, FILE="Output.txt", ACTION="WRITE", POSITION="REWIND")
   WRITE(25,*) ' V ',' POL ',' W '
