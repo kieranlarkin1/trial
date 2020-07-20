@@ -7,7 +7,7 @@ MODULE param
     REAL(8), PARAMETER :: gamma=0.8d0
     REAL(8), PARAMETER :: omega=1.d0
 
-    INTEGER, PARAMETER :: na = 1000
+    INTEGER, PARAMETER :: na = 100
     INTEGER, PARAMETER :: mn_a = 0.d0
     INTEGER, PARAMETER :: mx_a = 10.d0
 

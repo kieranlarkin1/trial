@@ -18,6 +18,7 @@ IMPLICIT NONE
   step = (mx_a-mn_a)/(na-1)
   a = (/ (mn_a+i*step, i = 0, na-1) /)
 
+  WRITE(*,*) ' c, a ',c,a
   v = 0.d0
   tv = 0.d0
 
@@ -47,12 +48,13 @@ IMPLICIT NONE
 
   WRITE(*,*) ' FINISHED! '
   WRITE(*,*) ' iteration: ',i, ' tolerance: ', step
-  WRITE(*,*) ' beta= ', beta
+  WRITE(*,*) ' beta= ', beta, aa
 
   OPEN (UNIT=25, FILE="Output.txt", ACTION="WRITE", POSITION="REWIND")
-  WRITE(25,*) v
-  WRITE(25,*) pol
-  WRITE(25,*) w
+  WRITE(25,*) ' V ',' POL ',' W '
+    DO i=1,na
+    WRITE(25,*) v(i),pol(i),w(i)
+    END DO
   CLOSE(25)
 
 END PROGRAM main
