@@ -1,6 +1,6 @@
 MODULE mod_subrou
 
-use param
+!use param
 
 IMPLICIT NONE
 
