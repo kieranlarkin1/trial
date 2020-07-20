@@ -14,6 +14,7 @@ REAL(8), DIMENSION(n), INTENT(IN) :: v
 REAL(8), DIMENSION(n), INTENT(OUT) :: out
 REAL(8), PARAMETER :: theta = 2.d0
 
+WRITE(*,*) ' phi, theta= ', phi, theta
 out = (phi/theta) * V
 
 END SUBROUTINE trial_sub

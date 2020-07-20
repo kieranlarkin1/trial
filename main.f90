@@ -12,9 +12,11 @@ IMPLICIT NONE
   REAL(8), DIMENSION(na,na) :: c
   ! REAL(8) :: beta
 !  REAL(8) :: phi
+  REAL(8) :: theta
 
   !beta = 0.9
 !  phi = 2.d0
+  theta = 4.d0
 
   WRITE(*,*) ' HELLO WORLD '
   step = (mx_a-mn_a)/(na-1)
