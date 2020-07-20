@@ -6,6 +6,7 @@
 #SBATCH -t 00:05:00
 #SBATCH -J trial
 
+module load intel/20.0
 make clean
 make
 
