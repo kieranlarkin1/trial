@@ -26,7 +26,7 @@ IMPLICIT NONE
   c(i,1) = LOG(a(i)+omega)
   c(i,2) = LOG(gamma*a(i)+omega)
   ap(i) = (1.d0-gamma)*a(i)*(1.d0+r)
-  ap_i(i) = MINLOC( ABS(ap(i)-a) )
+  ap_i(i) = MINLOC( ABS(ap(i)-a), 1 )
   END DO
 
   DO t=1,mx_it
@@ -52,7 +52,7 @@ IMPLICIT NONE
   OPEN (UNIT=25, FILE="Output.txt", ACTION="WRITE", POSITION="REWIND")
   WRITE(25,*) v
   WRITE(25,*) pol
-  WRITE(25,*) out
+  WRITE(25,*) w
   CLOSE(25)
 
 END PROGRAM main
