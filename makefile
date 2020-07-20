@@ -19,7 +19,7 @@ param.o: param.f90
 	$(silent)$(FF) -c $(switch) param.f90
 mod_subrou.mod: mod_subrou.o mod_subrou.f90
 		$(silent)$(FF) -c $(switch) mod_subrou.f90
-mod_subrou.o: mod_subrou.f90
+mod_subrou.o: mod_subrou.f90 param.mod
 		$(silent)$(FF) -c $(switch) mod_subrou.f90
 
 # Program:
