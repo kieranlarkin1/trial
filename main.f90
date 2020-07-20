@@ -28,7 +28,7 @@ IMPLICIT NONE
     c(i,j) = LOG( a(i)*(1.d0+r)+omega-a(j) )
    END DO
   END DO
-á
+
     WRITE(*,*) ' step: ', step
     WRITE(*,*) ' c(:,5) ',c(:,5)
     WRITE(*,*) ' c(5,:) ',c(5,:)
