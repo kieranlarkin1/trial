@@ -55,7 +55,7 @@ IMPLICIT NONE
 
   WRITE(*,*) ' FINISHED! '
   WRITE(*,*) ' iteration: ',i, ' tolerance: ', step
-  WRITE(*,*) ' beta= ', beta, phi, theta
+  WRITE(*,*) ' MA: beta, phi, theta= ', beta, phi, theta
   WRITE(*,*) ' V(0)= ', v0, v(1)
 
   OPEN (UNIT=25, FILE="Output.txt", ACTION="WRITE", POSITION="REWIND")

@@ -13,8 +13,11 @@ INTEGER, INTENT(IN) :: n
 REAL(8), DIMENSION(n), INTENT(IN) :: v
 REAL(8), DIMENSION(n), INTENT(OUT) :: out
 REAL(8), PARAMETER :: theta = 2.d0
+REAL(8) :: beta
 
-WRITE(*,*) ' phi, theta= ', phi, theta
+beta = 0.9d0
+
+WRITE(*,*) ' SR: beta, phi, theta= ', beta, phi, theta
 out = (phi/theta) * V
 
 END SUBROUTINE trial_sub
