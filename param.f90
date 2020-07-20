@@ -14,6 +14,6 @@ MODULE param
     INTEGER, PARAMETER :: mx_it = 10000
     REAL(8), PARAMETER :: tol = 1.d-6
 
-    REAL(8), PARAMETER :: aa = 1.d0
+!    REAL(8), PARAMETER :: aa = 1.d0
 
 END MODULE param
