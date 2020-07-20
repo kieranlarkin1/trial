@@ -7,7 +7,7 @@ IMPLICIT NONE
 
   INTEGER :: t,i,j
   REAL(8) :: step
-  REAL(8), DIMENSION(na) :: v, tv, a, ap
+  REAL(8), DIMENSION(na) :: v, tv, a, ap, w
   INTEGER, DIMENSION(na) :: ap_i, pol
   REAL(8), DIMENSION(na,2) :: c
   ! REAL(8) :: beta
@@ -31,7 +31,7 @@ IMPLICIT NONE
 
   DO t=1,mx_it
     DO i=1,na
-    tv(i) = MAX(c(i,1), c(i,2)+beta*v(ap_i) )
+    tv(i) = MAX(c(i,1), c(i,2)+beta*v(ap_i(i)) )
       IF ( tv(i) .GT. c(i,1) ) THEN
       pol(i) = 1
       ELSE
@@ -43,7 +43,7 @@ IMPLICIT NONE
   v = tv
   END DO
 
-  CALL trial_sub(v,n,out)
+  CALL trial_sub(v,na,w)
 
   WRITE(*,*) ' FINISHED! '
   WRITE(*,*) ' iteration: ',i, ' tolerance: ', step
