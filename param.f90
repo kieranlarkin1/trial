@@ -6,7 +6,6 @@ IMPLICIT NONE
     REAL(8), PARAMETER :: beta=0.989d0
     REAL(8), PARAMETER :: r=0.01d0
     REAL(8), PARAMETER :: omega=1.d0
-    REAL(8), PARAMETER :: omega2=2.d0
 
     REAL(8), PARAMETER :: vmin = -1.d10
 
