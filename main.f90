@@ -25,19 +25,18 @@ IMPLICIT NONE
   ! Choose to consume all or gamma share
   DO i=1,na
     DO j=1,na
-    c(i,j) = LOG( a(i)*(1.d0+r)+omega-a(j) )
+    c(i,j) = a(i)*(1.d0+r)+omega-a(j)
    END DO
   END DO
-
-    WRITE(*,*) ' step: ', step
-    WRITE(*,*) ' c(:,5) ',c(:,5)
-    WRITE(*,*) ' c(5,:) ',c(5,:)
-    WRITE(*,*) ' a    ',a
 
   DO t=1,mx_it
     DO i=1,na
       DO j=1,na
-      w(j) = c(i,j)+beta*v(j)
+        IF (c(i,j) .GT. 0.d0) THEN
+          w(j) = c(i,j)+beta*v(j)
+        ELSE
+          w(j) = vmin
+        END IF
       END DO
       pol(i) = MAXLOC(w,1)
       tv(i) = w(pol(i))
