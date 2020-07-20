@@ -10,9 +10,9 @@ IMPLICIT NONE
   REAL(8), DIMENSION(na) :: v, tv, a, ap, w
   INTEGER, DIMENSION(na) :: pol
   REAL(8), DIMENSION(na,na) :: c
-  ! REAL(8) :: beta
-  !
-  ! beta = 0.9
+  REAL(8) :: beta
+
+  beta = 0.9
 
   WRITE(*,*) ' HELLO WORLD '
   step = (mx_a-mn_a)/(na-1)
