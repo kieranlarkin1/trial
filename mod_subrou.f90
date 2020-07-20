@@ -1,7 +1,5 @@
 MODULE mod_subrou
 
-  USE param
-
 IMPLICIT NONE
 
 REAL(8), PARAMETER :: phi = 4.d0
@@ -9,6 +7,8 @@ REAL(8), PARAMETER :: phi = 4.d0
 CONTAINS
 
 SUBROUTINE trial_sub(v,n,out)
+
+USE param
 
 IMPLICIT NONE
 
