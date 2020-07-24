@@ -6,13 +6,17 @@ FF = ifort
 silent =
 
 mods1 = param.mod mod_subrou.mod
-objects = param.o mod_subrou.o main.o
+objects = param.o mod_subrou.o kindset.o ppsplinefit3edit.o main.o
 
 # Main command
 trial: $(objects)
 	$(silent)$(FF) -o trial $(switch) $(objects)
 
 # Modules
+kindset.o : kindset.f90
+	$(silent)$(compiler) kindset.f90 -$(optimise) -$(nobuild)
+ppsplinefit3edit.o : ppsplinefit3edit.f90 kindset.o $(object)
+	$(silent)$(compiler) ppsplinefit3edit.f90 -$(optimise) -$(nobuild)
 param.mod: param.o param.f90
 	$(silent)$(FF) -c $(switch) param.f90
 param.o: param.f90

@@ -2,10 +2,11 @@ PROGRAM main  !Program shell
 
  USE param
  USE mod_subrou
+ USE ppsplinefit3edit
 
 IMPLICIT NONE
 
-  INTEGER :: t,i,j
+  INTEGER :: t,i,j,b
   REAL(8) :: step, v0
   REAL(8), DIMENSION(na) :: v, tv, a, ap, w
   INTEGER, DIMENSION(na) :: pol
@@ -13,7 +14,8 @@ IMPLICIT NONE
   ! REAL(8) :: beta
 !  REAL(8) :: phi
   REAL(8) :: theta
-
+  INTEGER:: ns2
+  REAL(8), ALLOCATABLE:: s(:), csV(:,:), L(:,:), U(:,:), dtau(:), Sf(:), Vf(:), SVEC(:,:)
   !beta = 0.9
 !  phi = 2.d0
   theta = 4.d0
@@ -53,16 +55,58 @@ IMPLICIT NONE
 
   CALL trial_sub(v,na,w)
 
+
+  ! Fit spline
+  ! ----------
+
+  ns = ns
+  ns2 = ns - 2
+  ALLOCATE(s(ns), L(1, ns2-1), U(2, ns2), dtau(ns2+1))  ! Triangulation of knot points
+  ALLOCATE(v2(ns,m),SVEC(2,m),csV(4,(ns2+1)*m))         ! V at knot points. Coefficients of spline
+  ALLOCATE(Sf(nf),Vf(order+1,nf*m))                     ! Evaluate spline function
+
+  ! Select subset of nodes
+
+  b = (na-1)/(ns-1) ! Integer jump
+  DO i=0,ns-1
+  j = 1 + b*i
+  s(i) = a(j)
+    DO j=1,m
+    v2(i,m) = v(j)
+    END DO
+  END DO
+
+  ! Set bounds
+  SVEC(1,:)=0.76d0
+  SVEC(2,:)=0.74d0
+
+  ! Evaluate all nodes
+  Sf = a
+
+  ! Find LU decompostion of knots
+  CALL SPLHS(s, ns2, indicator, L, U, dtau)
+  ! Fit a spline to update polynomial approximations V - Find coefficient csV
+  CALL SPpp(v2, ns2, m, L, U, dtau, indicator, SVEC, csV)
+  ! Evaluate function value on nodes Sf: m functions
+  CALL SPeval(csV, s, ns2, m, Sf, nf, order, Vf)
+
   WRITE(*,*) ' FINISHED! '
-  WRITE(*,*) ' iteration: ',i, ' tolerance: ', step
+  WRITE(*,*) ' iteration: ',t, ' tolerance: ', step
   WRITE(*,*) ' MA: beta, phi, theta= ', beta, phi, theta
   WRITE(*,*) ' V(0)= ', v0, v(1)
 
   OPEN (UNIT=25, FILE="Output.txt", ACTION="WRITE", POSITION="REWIND")
-  WRITE(25,*) ' V ',' POL ',' W '
+  WRITE(25,*) ' A ', ' V ',' POL ',' W ',' Vf '
     DO i=1,na
-    WRITE(25,*) v(i),pol(i),w(i)
+    WRITE(25,*) a(i), v(i), pol(i), w(i), Vf(1,i)';'
     END DO
+
+  ! WRITE(25,*) a,';'
+  ! WRITE(25,*) v,';'
+  ! WRITE(25,*) pol,';'
+  ! WRITE(25,*) w,';'
+  ! WRITE(25,*) Vf,';'
   CLOSE(25)
+
 
 END PROGRAM main
