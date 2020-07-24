@@ -76,9 +76,9 @@ IMPLICIT NONE
     END DO
   END DO
 
-  ! Set bounds
-  SVEC(1,:)=0.76d0
-  SVEC(2,:)=0.74d0
+  ! Set end point condition values (Only relevant if indicator = natural or complete)
+  SVEC(1,:)=0.d0
+  SVEC(2,:)=0.d0
 
   ! Evaluate all nodes
   Sf = a
