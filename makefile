@@ -14,9 +14,9 @@ trial: $(objects)
 
 # Modules
 kindset.o : kindset.f90
-	$(silent)$(FF) kindset.f90 -$(nobuild)
+	$(silent)$(FF) -c kindset.f90
 ppsplinefit3edit.o : ppsplinefit3edit.f90 kindset.o $(object)
-	$(silent)$(FF) ppsplinefit3edit.f90 -$(nobuild)
+	$(silent)$(FF) -c ppsplinefit3edit.f90
 param.mod: param.o param.f90
 	$(silent)$(FF) -c $(switch) param.f90
 param.o: param.f90
