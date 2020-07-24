@@ -59,7 +59,6 @@ IMPLICIT NONE
   ! Fit spline
   ! ----------
 
-  ns = ns
   ns2 = ns - 2
   ALLOCATE(s(ns), L(1, ns2-1), U(2, ns2), dtau(ns2+1))  ! Triangulation of knot points
   ALLOCATE(v2(ns,m),SVEC(2,m),csV(4,(ns2+1)*m))         ! V at knot points. Coefficients of spline
