@@ -77,8 +77,8 @@ IMPLICIT NONE
   END DO
 
   ! Set end point condition values (Only relevant if indicator = natural or complete)
-  SVEC(1,:)=0.7d0
-  SVEC(2,:)=0.7d0
+  SVEC(1,:)=0.d0
+  SVEC(2,:)=0.d0
 
   ! Evaluate all nodes
   Sf = a
@@ -103,7 +103,7 @@ IMPLICIT NONE
 !    DO i=1,na
 !    WRITE(25,*) a(i),v(i),pol(i),w(i),Vf(1,i),';'
 !    END DO
-
+!  -----------
    WRITE(25,*) a,';'
    WRITE(25,*) v,';'
    WRITE(25,*) pol,';'

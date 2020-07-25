@@ -19,7 +19,7 @@ IMPLICIT NONE
 !    REAL(8), PARAMETER :: phi = 1.d0
 
 ! Spline parameters
-  INTEGER, PARAMETER :: ns=50                    ! total number of knots, including endpoints, on S
+  INTEGER, PARAMETER :: ns=25                    ! total number of knots, including endpoints, on S
   CHARACTER(30), PARAMETER :: indicator = "not-a-knot"  ! complete or natural spline endpoint condition
   INTEGER, PARAMETER :: m=1                ! Number of functions to evaluate.
 
