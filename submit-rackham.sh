@@ -7,7 +7,7 @@
 #SBATCH -J trial
 
 module load intel/20.0
-make clean
+# make clean
 make
 
 ./trial

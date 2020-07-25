@@ -99,16 +99,16 @@ IMPLICIT NONE
   WRITE(*,*) ' Vf= ', v(na/2), Vf(:,nf/2)
 
   OPEN (UNIT=25, FILE="Output.txt", ACTION="WRITE", POSITION="REWIND")
-  WRITE(25,*) ' A ', ' V ',' POL ',' W ',' Vf '
-    DO i=1,na
-    WRITE(25,*) a(i),v(i),pol(i),w(i),Vf(1,i),';'
-    END DO
+!  WRITE(25,*) ' A ', ' V ',' POL ',' W ',' Vf '
+!    DO i=1,na
+!    WRITE(25,*) a(i),v(i),pol(i),w(i),Vf(1,i),';'
+!    END DO
 
-  ! WRITE(25,*) a,';'
-  ! WRITE(25,*) v,';'
-  ! WRITE(25,*) pol,';'
-  ! WRITE(25,*) w,';'
-  ! WRITE(25,*) Vf,';'
+   WRITE(25,*) a,';'
+   WRITE(25,*) v,';'
+   WRITE(25,*) pol,';'
+   WRITE(25,*) w,';'
+   WRITE(25,*) Vf,';'
   CLOSE(25)
 
 
