@@ -16,7 +16,7 @@ trial: $(objects) main.o
 kindset.o: kindset.f90
 	$(silent)$(FF) -c $(optim) kindset.f90
 param.o: param.f90
-		$(silent)$(FF) -c $(optim) param.f90
+	$(silent)$(FF) -c $(optim) param.f90
 
 # Module (with dependencies)
 ppsplinefit3edit.o: ppsplinefit3edit.f90 kindset.o
