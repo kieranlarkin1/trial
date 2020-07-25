@@ -90,7 +90,7 @@ IMPLICIT NONE
   ! Evaluate function value on nodes Sf: m functions
   CALL SPeval(csV, s, ns2, m, Sf, nf, order, Vf)
 
-  WRITE(*,*) ' FINISHED! ',
+  WRITE(*,*) ' FINISHED! '
   WRITE(*,*) ' a2, v2', a2,v2
   WRITE(*,*) ' csv: ', csV
   WRITE(*,*) ' iteration: ',t, ' tolerance: ', step
