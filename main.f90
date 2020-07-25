@@ -7,6 +7,7 @@ PROGRAM main  !Program shell
 IMPLICIT NONE
 
   INTEGER :: t,i,j,k,b
+  INTEGER(8) :: reclen
   REAL(8) :: step, v0
   REAL(8), DIMENSION(na) :: v, tv, a, ap, w
   INTEGER, DIMENSION(na) :: pol
@@ -98,7 +99,8 @@ IMPLICIT NONE
   WRITE(*,*) ' V(0)= ', v0, v(1)
   WRITE(*,*) ' Vf= ', v(na/2), Vf(:,nf/2)
 
-  OPEN (UNIT=25, FILE="Output.txt", ACTION="WRITE", POSITION="REWIND", FORM='UNFORMATTED')
+  INQUIRE(iolength=reclen)a
+  OPEN (UNIT=25, FILE="Output.txt", ACTION="WRITE", RECL=reclen)
 !  WRITE(25,*) ' A ', ' V ',' POL ',' W ',' Vf '
 !    DO i=1,na
 !    WRITE(25,*) a(i),v(i),pol(i),w(i),Vf(1,i),';'
