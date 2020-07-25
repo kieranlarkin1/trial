@@ -10,7 +10,7 @@ objects = param.o mod_subrou.o kindset.o ppsplinefit3edit.o
 
 # Main command
 trial: $(objects) main.o
-	$(silent)$(FF) -o trial $(optim) $(objects)
+	$(silent)$(FF) -o trial $(optim) $(objects) main.o
 
 # Modules
 kindset.o: kindset.f90
