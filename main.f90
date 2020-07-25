@@ -98,7 +98,7 @@ IMPLICIT NONE
   WRITE(*,*) ' V(0)= ', v0, v(1)
   WRITE(*,*) ' Vf= ', v(na/2), Vf(:,nf/2)
 
-  OPEN (UNIT=25, FILE="Output.txt", ACTION="WRITE", POSITION="REWIND", FORM='FORMATTED')
+  OPEN (UNIT=25, FILE="Output.txt", ACTION="WRITE", POSITION="REWIND", FORM='PRINT')
 !  WRITE(25,*) ' A ', ' V ',' POL ',' W ',' Vf '
 !    DO i=1,na
 !    WRITE(25,*) a(i),v(i),pol(i),w(i),Vf(1,i),';'
