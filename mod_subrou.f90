@@ -1,6 +1,6 @@
 MODULE mod_subrou
 
-use param
+!use param
 
 IMPLICIT NONE
 
@@ -10,7 +10,7 @@ CONTAINS
 
 SUBROUTINE trial_sub(v,n,out)
 
-!USE param
+  USE param
 
 IMPLICIT NONE
 
