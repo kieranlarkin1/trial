@@ -91,7 +91,7 @@ IMPLICIT NONE
   CALL SPeval(csV, s, ns2, m, Sf, nf, order, Vf)
 
   WRITE(*,*) ' FINISHED! '
-  WRITE(*,*) ' a2, v2', a2,v2
+  WRITE(*,*) ' s, v2', s,v2
   WRITE(*,*) ' csv: ', csV
   WRITE(*,*) ' iteration: ',t, ' tolerance: ', step
   WRITE(*,*) ' MA: beta, phi, theta= ', beta, phi, theta
