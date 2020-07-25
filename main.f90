@@ -15,7 +15,8 @@ IMPLICIT NONE
 !  REAL(8) :: phi
   REAL(8) :: theta
   INTEGER:: ns2
-  REAL(8), ALLOCATABLE:: s(:), csV(:,:), L(:,:), U(:,:), dtau(:), Sf(:), Vf(:), SVEC(:,:)
+  REAL(8), ALLOCATABLE:: s(:), csV(:,:), L(:,:), U(:,:), dtau(:), &
+    v2(:), Sf(:), Vf(:,:), SVEC(:,:)
   !beta = 0.9
 !  phi = 2.d0
   theta = 4.d0
@@ -97,7 +98,7 @@ IMPLICIT NONE
   OPEN (UNIT=25, FILE="Output.txt", ACTION="WRITE", POSITION="REWIND")
   WRITE(25,*) ' A ', ' V ',' POL ',' W ',' Vf '
     DO i=1,na
-    WRITE(25,*) a(i), v(i), pol(i), w(i), Vf(1,i)';'
+    WRITE(25,*) a(i), v(i), pol(i), w(i), Vf(1,i),';'
     END DO
 
   ! WRITE(25,*) a,';'

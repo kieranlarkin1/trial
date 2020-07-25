@@ -5,7 +5,7 @@ FF = ifort
 #silent = @
 silent =
 
-mods1 = param.mod mod_subrou.mod
+mods1 = param.mod mod_subrou.mod ppsplinefit3edit.mod
 objects = param.o mod_subrou.o kindset.o ppsplinefit3edit.o main.o
 
 # Main command
