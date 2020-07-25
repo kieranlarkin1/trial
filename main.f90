@@ -1,5 +1,6 @@
 PROGRAM main  !Program shell
 
+ USE kindset
  USE param
  USE mod_subrou
  USE ppsplinefit3edit
@@ -8,15 +9,15 @@ IMPLICIT NONE
 
   INTEGER :: t,i,j,k,b
   INTEGER(8) :: reclen
-  REAL(8) :: step, v0
-  REAL(8), DIMENSION(na) :: v, tv, a, ap, w
-  INTEGER, DIMENSION(na) :: pol
-  REAL(8), DIMENSION(na,na) :: c
-  ! REAL(8) :: beta
-!  REAL(8) :: phi
-  REAL(8) :: theta
+  REAL(rk) :: step, v0
+  REAL(rk), DIMENSION(na) :: v, tv, a, ap, w
+  INTEGER(ik), DIMENSION(na) :: pol
+  REAL(rk), DIMENSION(na,na) :: c
+  ! REAL(rk) :: beta
+!  REAL(rk) :: phi
+  REAL(rk) :: theta
   INTEGER:: ns2
-  REAL(8), ALLOCATABLE:: s(:), csV(:,:), L(:,:), U(:,:), dtau(:), &
+  REAL(rk), ALLOCATABLE:: s(:), csV(:,:), L(:,:), U(:,:), dtau(:), &
     v2(:,:), Sf(:), Vf(:,:), SVEC(:,:)
   !beta = 0.9
 !  phi = 2.d0

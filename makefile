@@ -16,13 +16,13 @@ trial: $(objects) main.o
 # Modules (No dependency)
 kindset.o: kindset.f90
 	$(silent)$(FF) -c $(optim) kindset.f90
-param.o: param.f90
+param.o: param.f90 kindset.o
 	$(silent)$(FF) -c $(optim) param.f90
 
 # Modules (with dependencies)
 ppsplinefit3edit.o: ppsplinefit3edit.f90 kindset.o
 	$(silent)$(FF) -c $(optim) ppsplinefit3edit.f90
-mod_subrou.o: mod_subrou.f90 param.o
+mod_subrou.o: mod_subrou.f90 kindset.o param.o
 	$(silent)$(FF) -c $(optim) mod_subrou.f90
 
 # Program:

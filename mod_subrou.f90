@@ -4,21 +4,22 @@ MODULE mod_subrou
 
 IMPLICIT NONE
 
-REAL(8), PARAMETER :: phi = 4.d0
+REAL(rk), PARAMETER :: phi = 4.d0
 
 CONTAINS
 
 SUBROUTINE trial_sub(v,n,out)
 
+  USE kindset
   USE param
 
 IMPLICIT NONE
 
-INTEGER, INTENT(IN) :: n
-REAL(8), DIMENSION(n), INTENT(IN) :: v
-REAL(8), DIMENSION(n), INTENT(OUT) :: out
-REAL(8), PARAMETER :: theta = 2.d0
-!REAL(8) :: beta
+INTEGER(ik), INTENT(IN) :: n
+REAL(rk), DIMENSION(n), INTENT(IN) :: v
+REAL(rk), DIMENSION(n), INTENT(OUT) :: out
+REAL(rk), PARAMETER :: theta = 2.d0
+!REAL(rk) :: beta
 !beta = 0.9
 
 WRITE(*,*) ' SR: beta, phi, theta= ', beta, phi, theta
