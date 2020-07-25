@@ -77,7 +77,7 @@ IMPLICIT NONE
   END DO
 
   ! Set end point condition values (Only relevant if indicator = natural or complete)
-  SVEC(1,:)=0.d0
+  SVEC(1,:)=-100000.d0
   SVEC(2,:)=0.d0
 
   ! Evaluate all nodes
