@@ -15,11 +15,11 @@ trial: $(objects)
 # Modules
 kindset.o: kindset.f90
 	$(silent)$(FF) -c kindset.f90
-ppsplinefit3edit.o: ppsplinefit3edit.f90 kindset.mod
+ppsplinefit3edit.o: ppsplinefit3edit.f90 kindset.o
 	$(silent)$(FF) -c ppsplinefit3edit.f90
 param.o: param.f90
 	$(silent)$(FF) -c $(switch) param.f90
-mod_subrou.o: mod_subrou.f90 param.mod
+mod_subrou.o: mod_subrou.f90 param.o
 		$(silent)$(FF) -c $(switch) mod_subrou.f90
 
 # Program:
