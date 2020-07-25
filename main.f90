@@ -94,7 +94,7 @@ IMPLICIT NONE
   WRITE(*,*) ' iteration: ',t, ' tolerance: ', step
   WRITE(*,*) ' MA: beta, phi, theta= ', beta, phi, theta
   WRITE(*,*) ' V(0)= ', v0, v(1)
-  WRITE(*,*) ' Vf= ', v(round(na/2)), Vf(:,round(nf/2))
+  WRITE(*,*) ' Vf= ', v(nint(na/2)), Vf(:,nint(nf/2))
 
   OPEN (UNIT=25, FILE="Output.txt", ACTION="WRITE", POSITION="REWIND")
   WRITE(25,*) ' A ', ' V ',' POL ',' W ',' Vf '
