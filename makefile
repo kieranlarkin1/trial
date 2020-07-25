@@ -18,7 +18,7 @@ kindset.o: kindset.f90
 param.o: param.f90
 	$(silent)$(FF) -c $(optim) param.f90
 
-# Module (with dependencies)
+# Modules (with dependencies)
 ppsplinefit3edit.o: ppsplinefit3edit.f90 kindset.o
 	$(silent)$(FF) -c $(optim) ppsplinefit3edit.f90
 mod_subrou.o: mod_subrou.f90 param.o
@@ -32,4 +32,4 @@ main.o: $(objects) main.f90
 clean:
 	$(silent)rm *.o
 	$(silent)rm *.mod
-	$(silent)rm * trial
+	$(silent)rm trial
