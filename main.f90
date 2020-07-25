@@ -6,7 +6,7 @@ PROGRAM main  !Program shell
 
 IMPLICIT NONE
 
-  INTEGER :: t,i,j,b
+  INTEGER :: t,i,j,k,b
   REAL(8) :: step, v0
   REAL(8), DIMENSION(na) :: v, tv, a, ap, w
   INTEGER, DIMENSION(na) :: pol
@@ -70,15 +70,15 @@ IMPLICIT NONE
   b = (na-1)/(ns-1) ! Integer jump
   DO i=0,ns-1
   j = 1 + b*i
-  s(i) = a(j)
-    DO j=1,m
-    v2(i,m) = v(j)
+  s(i+1) = a(j)
+    DO k=1,m
+    v2(i+1,k) = v(j)
     END DO
   END DO
 
   ! Set end point condition values (Only relevant if indicator = natural or complete)
-  SVEC(1,:)=0.d0
-  SVEC(2,:)=0.d0
+  SVEC(1,:)=0.7d0
+  SVEC(2,:)=0.7d0
 
   ! Evaluate all nodes
   Sf = a
@@ -90,7 +90,9 @@ IMPLICIT NONE
   ! Evaluate function value on nodes Sf: m functions
   CALL SPeval(csV, s, ns2, m, Sf, nf, order, Vf)
 
-  WRITE(*,*) ' FINISHED! ', csV
+  WRITE(*,*) ' FINISHED! ',
+  WRITE(*,*) ' a2, v2', a2,v2
+  WRITE(*,*) ' csv: ', csV
   WRITE(*,*) ' iteration: ',t, ' tolerance: ', step
   WRITE(*,*) ' MA: beta, phi, theta= ', beta, phi, theta
   WRITE(*,*) ' V(0)= ', v0, v(1)
