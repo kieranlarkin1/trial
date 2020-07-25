@@ -1,10 +1,11 @@
 # Make file compiler
 
-#FF = gfortran
-FF = ifort
+FF = gfortran
+#FF = ifort
 #silent = @
 silent =
-optim = -O2
+#optim = -O2
+optim =
 
 objects = param.o mod_subrou.o kindset.o ppsplinefit3edit.o
 
