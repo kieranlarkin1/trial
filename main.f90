@@ -101,7 +101,7 @@ IMPLICIT NONE
   OPEN (UNIT=25, FILE="Output.txt", ACTION="WRITE", POSITION="REWIND")
   WRITE(25,*) ' A ', ' V ',' POL ',' W ',' Vf '
     DO i=1,na
-    WRITE(25,*) a(i), v(i), pol(i), w(i), Vf(1,i),';'
+    WRITE(25,*) a(i),v(i),pol(i),w(i),Vf(1,i),';'
     END DO
 
   ! WRITE(25,*) a,';'
