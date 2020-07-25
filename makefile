@@ -6,11 +6,10 @@ FF = ifort
 silent =
 optim = -O2
 
-mods = param.mod mod_subrou.mod kindset.mod ppsplinefit3edit.mod
-objects = param.o mod_subrou.o kindset.o ppsplinefit3edit.o main.o
+objects = param.o mod_subrou.o kindset.o ppsplinefit3edit.o
 
 # Main command
-trial: $(objects)
+trial: $(objects) main.o
 	$(silent)$(FF) -o trial $(optim) $(objects)
 
 # Modules
@@ -24,7 +23,7 @@ mod_subrou.o: mod_subrou.f90 param.o
 	$(silent)$(FF) -c $(optim) mod_subrou.f90
 
 # Program:
-main.o: $(mods) main.f90
+main.o: $(objects) main.f90
 	$(silent)$(FF) -c $(optim) main.f90
 
 # Cleaning everything
