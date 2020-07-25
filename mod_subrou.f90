@@ -1,5 +1,6 @@
 MODULE mod_subrou
 
+USE kindset
 !use param
 
 IMPLICIT NONE
