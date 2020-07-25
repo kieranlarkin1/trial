@@ -101,7 +101,7 @@ IMPLICIT NONE
   WRITE(*,*) ' Vf= ', v(na/2), Vf(:,nf/2)
 
   INQUIRE(iolength=reclen)a
-  OPEN (UNIT=25, FILE="Output.txt", ACTION="WRITE", RECL=reclen)
+  OPEN (UNIT=25, FILE="Output.txt", ACTION="WRITE")
 !  WRITE(25,*) ' A ', ' V ',' POL ',' W ',' Vf '
 !    DO i=1,na
 !    WRITE(25,*) a(i),v(i),pol(i),w(i),Vf(1,i),';'

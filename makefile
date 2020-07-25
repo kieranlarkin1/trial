@@ -4,8 +4,8 @@
 FF = ifort
 #silent = @
 silent =
-#optim = -O2
-optim =
+optim = -O2 -wrap-margin
+#optim =
 
 objects = param.o mod_subrou.o kindset.o ppsplinefit3edit.o
 
