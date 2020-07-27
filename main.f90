@@ -8,11 +8,12 @@ PROGRAM main  !Program shell
 IMPLICIT NONE
 
   INTEGER :: t,i,j,k,b
-  INTEGER(8) :: reclen
   REAL(rk) :: step, v0
-  REAL(rk), DIMENSION(na) :: v, tv, a, ap, w
-  INTEGER(ik), DIMENSION(na) :: pol
-  REAL(rk), DIMENSION(na,na) :: c
+  REAL(rk), DIMENSION(na) :: a, w
+  REAL(rk), DIMENSION(ne) :: e
+  REAL(rk), DIMENSION(na,ne) :: v, tv
+  INTEGER(ik), DIMENSION(na,ne) :: pol
+  REAL(rk), DIMENSION(na,ne,na) :: c
   ! REAL(rk) :: beta
 !  REAL(rk) :: phi
   REAL(rk) :: theta
@@ -26,37 +27,43 @@ IMPLICIT NONE
   WRITE(*,*) ' HELLO WORLD '
   step = (mx_a-mn_a)/(na-1)
   a = (/ (mn_a+i*step, i = 0, na-1) /)
+  step = (mx_e-mn_e)/(ne-1)
+  e = (/ (mn_e+i*step, i = 0, ne-1) /)
 
-  v0 = log(omega)/(1-beta)
+  v0 = log(omega+e(ne0))/(1-beta)
   v = 0.d0
   tv = 0.d0
   c = 0.d0
 
   ! Choose to consume all or gamma share
   DO i=1,na
-    DO j=1,na
-      c(i,j) = a(i)*(1.d0+r)+omega-a(j)
+    DO j=1,ne
+      DO k=1,na
+      c(i,j,k) = a(i)*(1.d0+r)+omega+e(j)-a(k)
+      END DO
     END DO
   END DO
 
   DO t=1,mx_it
     DO i=1,na
       DO j=1,na
-        IF (c(i,j) .GT. 0.d0) THEN
-          w(j) = LOG( c(i,j) ) + beta*v(j)
-        ELSE
-          w(j) = vmin
-        END IF
+        DO k=1,na
+          IF (c(i,j,k) .GT. 0.d0) THEN
+            w(k) = LOG( c(i,j,k) ) + beta*( pi*v(k,j) + (1.d0-pi)*v(k,ne0) )á
+          ELSE
+            w(k) = vmin
+          END IF
+        END DO
       END DO
-      pol(i) = MAXLOC(w,1)
-      tv(i) = w(pol(i))
+      pol(i,j) = MAXLOC(w,1)
+      tv(i,j) = w(pol(i,j))
     END DO
   step = MAXVAL(ABS(tv-v))
   IF (step .LT. tol) EXIT
   v = tv
   END DO
 
-  CALL trial_sub(v,na,w)
+  CALL trial_sub(v(:,ne0),na,w)
 
 
   ! Fit spline
@@ -74,7 +81,7 @@ IMPLICIT NONE
   j = 1 + b*i
   s(i+1) = a(j)
     DO k=1,m
-    v2(i+1,k) = v(j)
+    v2(i+1,k) = v(j,ne0)
     END DO
   END DO
 
@@ -97,10 +104,9 @@ IMPLICIT NONE
 !  WRITE(*,*) ' csv: ', csV
   WRITE(*,*) ' iteration: ',t, ' tolerance: ', step
   WRITE(*,*) ' MA: beta, phi, theta= ', beta, phi, theta
-  WRITE(*,*) ' V(0)= ', v0, v(1)
-  WRITE(*,*) ' Vf= ', v(na/2), Vf(:,nf/2)
+  WRITE(*,*) ' V(0)= ', v0, v(1,ne0)
+  WRITE(*,*) ' Vf= ', v(na/2,ne0), Vf(:,nf/2,ne0)
 
-  INQUIRE(iolength=reclen)a
   OPEN (UNIT=25, FILE="Output.txt", ACTION="WRITE")
 !  WRITE(25,*) ' A ', ' V ',' POL ',' W ',' Vf '
 !    DO i=1,na
@@ -108,8 +114,8 @@ IMPLICIT NONE
 !    END DO
 !  -----------
    WRITE(25,*) a,';'
-   WRITE(25,*) v,';'
-   WRITE(25,*) pol,';'
+   WRITE(25,*) v(:,ne0),';'
+   WRITE(25,*) pol(:,ne0),';'
    WRITE(25,*) w,';'
    WRITE(25,*) Vf,';'
   CLOSE(25)
