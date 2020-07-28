@@ -81,7 +81,7 @@ IMPLICIT NONE
   ns2 = ns - 2
   ALLOCATE(s(ns), L(1, ns2-1), U(2, ns2), dtau(ns2+1))  ! Triangulation of knot points
   ALLOCATE(v2(ns,m),SVEC(2,m),csV(4,(ns2+1)*m))         ! V at knot points. Coefficients of spline
-  ALLOCATE(Sf(nf),Vf(order+1,nf*m),Vf_out(nf,m))                     ! Evaluate spline function
+  ALLOCATE(Sf(nf),Vf(order+1,nf*m),Vf_out(nf,m))        ! Evaluate spline function
 
   ! Select subset of nodes
 
@@ -95,7 +95,7 @@ IMPLICIT NONE
   END DO
 
   ! Set end point condition values (Only relevant if indicator = natural or complete)
-  SVEC(1,:)=-100000.d0
+  SVEC(1,:)=-1.d10
   SVEC(2,:)=0.d0
 
   ! Evaluate all nodes
@@ -114,13 +114,13 @@ IMPLICIT NONE
   END DO
 
   WRITE(*,*) ' FINISHED! '
-!  WRITE(*,*) ' s, v2', s,v2
-!  WRITE(*,*) ' csv: ', csV
+  WRITE(*,*) ' s, v2', s,v2
+  WRITE(*,*) ' csv: ', csV
   WRITE(*,*) ' risk ', risk
   WRITE(*,*) ' iteration: ',t, ' tolerance: ', step
   WRITE(*,*) ' MA: beta, phi, theta= ', beta, phi, theta
-  WRITE(*,*) ' V(0)= ', v0, v(1,ne0), v2
-  WRITE(*,*) ' Vf= ', v(na/2,ne0), Vf(:,nf/2), Vf
+  WRITE(*,*) ' V(0)= ', v0, v(1,ne0)
+  WRITE(*,*) ' Vf= ', v(na/2,ne0), Vf(:,nf/2),';', Vf
 
   OPEN (UNIT=25, FILE="Output.txt", ACTION="WRITE")
 !  WRITE(25,*) ' A ', ' V ',' POL ',' W ',' Vf '
