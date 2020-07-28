@@ -18,7 +18,7 @@ IMPLICIT NONE
     REAL(rk), PARAMETER :: mx_a = 10.d0
 
     INTEGER(ik), PARAMETER :: ne = 3
-    REAL(rk), PARAMETER :: mn_e = 0.d-4
+    REAL(rk), PARAMETER :: mn_e = 1.d-4
     REAL(rk), PARAMETER :: mx_e = 1.d0
     INTEGER(ik), PARAMETER :: ne0 = ne/2 + 1              ! mean income level
 
