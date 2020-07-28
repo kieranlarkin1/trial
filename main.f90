@@ -10,7 +10,7 @@ IMPLICIT NONE
   INTEGER :: t,i,j,k,b
   REAL(rk) :: step, v0
   REAL(rk), DIMENSION(na) :: a, w
-  REAL(rk), DIMENSION(ne) :: e
+  REAL(rk), DIMENSION(ne) :: e, risk
   REAL(rk), DIMENSION(na,ne) :: v, tv
   INTEGER(ik), DIMENSION(na,ne) :: pol
   REAL(rk), DIMENSION(na,ne,na) :: c
@@ -29,6 +29,8 @@ IMPLICIT NONE
   a = (/ (mn_a+i*step, i = 0, na-1) /)
   step = (mx_e-mn_e)/(ne-1)
   e = (/ (mn_e+i*step, i = 0, ne-1) /)
+  step = 2.d0*sigma_r/(ne-1)
+  risk = (/ (r-sigma_r+i*step, i = 0, ne-1) /)
 
   v0 = log(omega+e(ne0))/(1-beta)
   v = 0.d0
@@ -39,7 +41,7 @@ IMPLICIT NONE
   DO i=1,na
     DO j=1,ne
       DO k=1,na
-      c(i,j,k) = a(i)*(1.d0+r)+omega+e(j)-a(k)
+      c(i,j,k) = a(i)*(1.d0+r+risk(j))+omega+e(j)-a(k)
       END DO
     END DO
   END DO
@@ -49,7 +51,12 @@ IMPLICIT NONE
       DO j=1,ne
         DO k=1,na
           IF (c(i,j,k) .GT. 0.d0) THEN
-            w(k) = LOG( c(i,j,k) ) + beta*( pi*v(k,j) + (1.d0-pi)*v(k,ne0) )
+            IF (alpha==1.d0) THEN
+              w(k) = LOG( c(i,j,k) )
+            ELSE
+              w(k) = ( c(i,j,k)**(1.d0-alpha) -1 )/(1.d0-alpha)
+            END IF
+            w(k) = w(k) + beta*( pi*v(k,j) + (1.d0-pi)*v(k,ne0) )
           ELSE
             w(k) = vmin
           END IF
@@ -108,7 +115,7 @@ IMPLICIT NONE
   WRITE(*,*) ' FINISHED! '
 !  WRITE(*,*) ' s, v2', s,v2
 !  WRITE(*,*) ' csv: ', csV
-  WRITE(*,*)
+  WRITE(*,*) ' risk ', risk
   WRITE(*,*) ' iteration: ',t, ' tolerance: ', step
   WRITE(*,*) ' MA: beta, phi, theta= ', beta, phi, theta
   WRITE(*,*) ' V(0)= ', v0, v(1,ne0)

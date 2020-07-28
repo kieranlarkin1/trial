@@ -4,7 +4,7 @@ USE kindset
 
 IMPLICIT NONE
 
-    REAL(rk), PARAMETER :: alpha=2.d0       !elasticity of substitution
+    REAL(rk), PARAMETER :: alpha=1.d0       !elasticity of substitution
     REAL(rk), PARAMETER :: beta=0.989d0
     REAL(rk), PARAMETER :: r=0.01d0
 
@@ -19,8 +19,10 @@ IMPLICIT NONE
 
     INTEGER(ik), PARAMETER :: ne = 5
     REAL(rk), PARAMETER :: mn_e = 1.d-5
-    REAL(rk), PARAMETER :: mx_e = 0.5d0
+    REAL(rk), PARAMETER :: mx_e = 0.25d0
     INTEGER(ik), PARAMETER :: ne0 = ne/2 + 1              ! mean income level
+    REAL(rk), PARAMETER :: sigma_r = 5.d-4
+
 
     INTEGER(ik), PARAMETER :: mx_it = 10000
     REAL(rk), PARAMETER :: tol = 1.d-6
