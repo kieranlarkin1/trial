@@ -30,7 +30,7 @@ IMPLICIT NONE
   step = (mx_e-mn_e)/(ne-1)
   e = (/ (mn_e+i*step, i = 0, ne-1) /)
   step = 2.d0*sigma_r/(ne-1)
-  risk = (/ (r-sigma_r+i*step, i = 0, ne-1) /)
+  risk = (/ (-sigma_r+i*step, i = 0, ne-1) /)
 
   v0 = log(omega+e(ne0))/(1-beta)
   v = 0.d0
