@@ -46,7 +46,7 @@ IMPLICIT NONE
 
   DO t=1,mx_it
     DO i=1,na
-      DO j=1,na
+      DO j=1,ne
         DO k=1,na
           IF (c(i,j,k) .GT. 0.d0) THEN
             w(k) = LOG( c(i,j,k) ) + beta*( pi*v(k,j) + (1.d0-pi)*v(k,ne0) )
@@ -103,6 +103,7 @@ IMPLICIT NONE
   WRITE(*,*) ' FINISHED! '
 !  WRITE(*,*) ' s, v2', s,v2
 !  WRITE(*,*) ' csv: ', csV
+  WRITE(*,*)
   WRITE(*,*) ' iteration: ',t, ' tolerance: ', step
   WRITE(*,*) ' MA: beta, phi, theta= ', beta, phi, theta
   WRITE(*,*) ' V(0)= ', v0, v(1,ne0)
