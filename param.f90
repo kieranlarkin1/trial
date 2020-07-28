@@ -8,7 +8,7 @@ IMPLICIT NONE
     REAL(rk), PARAMETER :: beta=0.989d0
     REAL(rk), PARAMETER :: r=0.01d0
 
-    REAL(rk), PARAMETER :: omega=5.d-3    ! transfer
+    REAL(rk), PARAMETER :: omega=2.5d-3    ! transfer
     REAL(rk), PARAMETER :: pi = 0.85d0      ! Persistence
 
     REAL(rk), PARAMETER :: vmin = -1.d10
@@ -21,7 +21,7 @@ IMPLICIT NONE
     REAL(rk), PARAMETER :: mn_e = 0.d0
     REAL(rk), PARAMETER :: mx_e = 0.1d0
     INTEGER(ik), PARAMETER :: ne0 = ne/2 + 1              ! mean income level
-    REAL(rk), PARAMETER :: sigma_r = 5.d-3
+    REAL(rk), PARAMETER :: sigma_r = 1.d-2
 
 
     INTEGER(ik), PARAMETER :: mx_it = 10000
