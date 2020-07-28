@@ -32,7 +32,7 @@ IMPLICIT NONE
 ! Spline parameters
   INTEGER(ik), PARAMETER :: ns=25                    ! total number of knots, including endpoints, on S
   CHARACTER(30), PARAMETER :: indicator = "not-a-knot"  ! complete or natural spline endpoint condition
-  INTEGER(ik), PARAMETER :: m=5             ! Number of functions to evaluate.
+  INTEGER(ik), PARAMETER :: m=2            ! Number of functions to evaluate.
 
   INTEGER(ik), PARAMETER :: nf=na                    ! total number of function evaluations
   INTEGER(ik), PARAMETER :: order=0                 ! 0: value, 1: first derivative, 2: 2nd derivative
