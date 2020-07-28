@@ -115,7 +115,9 @@ IMPLICIT NONE
 !    END DO
 !  -----------
    WRITE(25,*) a,';'
-   WRITE(25,*) v(:,ne0),';'
+   DO i=1,ne
+   WRITE(25,*) v(:,i),';'
+   END DO
    WRITE(25,*) pol(:,ne0),';'
    WRITE(25,*) w,';'
    WRITE(25,*) Vf,';'
