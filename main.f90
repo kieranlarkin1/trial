@@ -54,9 +54,10 @@ IMPLICIT NONE
             w(k) = vmin
           END IF
         END DO
+
+        pol(i,j) = MAXLOC(w,1)
+        tv(i,j) = w(pol(i,j))
       END DO
-      pol(i,j) = MAXLOC(w,1)
-      tv(i,j) = w(pol(i,j))
     END DO
   step = MAXVAL(ABS(tv-v))
   IF (step .LT. tol) EXIT

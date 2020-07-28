@@ -9,7 +9,7 @@ IMPLICIT NONE
     REAL(rk), PARAMETER :: r=0.01d0
 
     REAL(rk), PARAMETER :: omega=1.d-10    ! transfer
-    REAL(rk), PARAMETER :: pi = 0.8d0      ! Persistence
+    REAL(rk), PARAMETER :: pi = 1.d0 !0.8d0      ! Persistence
 
     REAL(rk), PARAMETER :: vmin = -1.d10
 
