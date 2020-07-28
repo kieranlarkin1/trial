@@ -49,7 +49,7 @@ IMPLICIT NONE
       DO j=1,na
         DO k=1,na
           IF (c(i,j,k) .GT. 0.d0) THEN
-            w(k) = LOG( c(i,j,k) ) + beta*( pi*v(k,j) + (1.d0-pi)*v(k,ne0) )á
+            w(k) = LOG( c(i,j,k) ) + beta*( pi*v(k,j) + (1.d0-pi)*v(k,ne0) )
           ELSE
             w(k) = vmin
           END IF
@@ -105,7 +105,7 @@ IMPLICIT NONE
   WRITE(*,*) ' iteration: ',t, ' tolerance: ', step
   WRITE(*,*) ' MA: beta, phi, theta= ', beta, phi, theta
   WRITE(*,*) ' V(0)= ', v0, v(1,ne0)
-  WRITE(*,*) ' Vf= ', v(na/2,ne0), Vf(:,nf/2,ne0)
+  WRITE(*,*) ' Vf= ', v(na/2,ne0), Vf(:,nf/2)
 
   OPEN (UNIT=25, FILE="Output.txt", ACTION="WRITE")
 !  WRITE(25,*) ' A ', ' V ',' POL ',' W ',' Vf '
