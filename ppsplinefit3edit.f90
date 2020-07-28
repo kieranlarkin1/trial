@@ -169,6 +169,9 @@ REAL(rk):: B(r,m), y(r,m), s(r,m), df(z+r,m)
 REAL(rk), INTENT(OUT):: c(4,(r+z)*m)
 CHARACTER(20), INTENT(IN):: indicator
 
+INTEGER(ik) :: i
+REAL(rk) :: dtau_int(r+1,m) ! (KL)
+
 ! Program accepts function values at a grid of r+2 knot points for m functions,
 ! the LU factorisation of the LHS of the system of equations which determine
 ! the slope coefficients and are invariant to function values, and the similarly
@@ -177,9 +180,16 @@ CHARACTER(20), INTENT(IN):: indicator
 ! if complete is chosen, the endpoint slopes for each of the m splines being
 ! simultaneously determined.
 
+! (KL!!!!) THINK dtau need to be m-dimensional in SPRHS and SPppcoeff, so repeat dtau
+! To match size. If wrong replace dtau_int with dtau.
+DO i=1,m
+dtau_int(:,i) = dtau(:,1)
+END DO
+
+end do
 ! Determine B, the RHS to the m system of equations and df, divided difference of
 ! function values.
-CALL SPRHS(dtau, r, m, fvals, indicator, SVEC, B, df)
+CALL SPRHS(dtau_int, r, m, fvals, indicator, SVEC, B, df)
 
 ! Determine y from B as the first step in solving the system of equations
 CALL SPLsolve(L,B,r,m,y)
@@ -189,7 +199,7 @@ CALL SPLsolve(L,B,r,m,y)
 CALL SPUsolve(U,y,r,m,s)
 
 ! Use s, fvals, dtau and df to retrieve coefficients for the m splines in c.
-CALL SPppcoeff(fvals, dtau, r, m, s, df, indicator, SVEC, c)
+CALL SPppcoeff(fvals, dtau_int, r, m, s, df, indicator, SVEC, c)
 
 CONTAINS
 
