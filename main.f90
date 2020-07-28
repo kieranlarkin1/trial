@@ -95,7 +95,7 @@ IMPLICIT NONE
   END DO
 
   ! Set end point condition values (Only relevant if indicator = natural or complete)
-  SVEC(1,:)=-1.d10
+  SVEC(1,:)=-1.d1
   SVEC(2,:)=0.d0
 
   ! Evaluate all nodes
@@ -105,6 +105,7 @@ IMPLICIT NONE
   CALL SPLHS(s, ns2, indicator, L, U, dtau)
   ! Fit a spline to update polynomial approximations V - Find coefficient csV
   CALL SPpp(v2, ns2, m, L, U, dtau, indicator, SVEC, csV)
+    WRITE(*,*) ' csv: ', csV
   ! Evaluate function value on nodes Sf: m functions
   CALL SPeval(csV, s, ns2, m, Sf, nf, order, Vf)
 
