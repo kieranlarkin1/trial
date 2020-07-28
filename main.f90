@@ -90,7 +90,7 @@ IMPLICIT NONE
   j = 1 + b*i
   s(i+1) = a(j)
     DO k=1,m
-    v2(i+1,k) = v(j,2 !v(j,MIN(k,ne))
+    v2(i+1,k) = v(j,2) !v(j,MIN(k,ne))
     END DO
   END DO
 
@@ -114,13 +114,15 @@ IMPLICIT NONE
   END DO
 
   WRITE(*,*) ' FINISHED! '
-  WRITE(*,*) ' s, v2', s,v2
+  WRITE(*,*) ' s: ', s
+  WRITE(*,*) ' v2: ', v2
   WRITE(*,*) ' csv: ', csV
-  WRITE(*,*) ' risk ', risk
+  WRITE(*,*) ' risk: ', risk
   WRITE(*,*) ' iteration: ',t, ' tolerance: ', step
   WRITE(*,*) ' MA: beta, phi, theta= ', beta, phi, theta
   WRITE(*,*) ' V(0)= ', v0, v(1,ne0)
-  WRITE(*,*) ' Vf= ', v(na/2,ne0), Vf(:,nf/2),';', Vf
+  WRITE(*,*) ' Vf= ', v(na/2,ne0), Vf(:,nf/2)
+  WRITE(*,*) ' Vf= ', Vf
 
   OPEN (UNIT=25, FILE="Output.txt", ACTION="WRITE")
 !  WRITE(25,*) ' A ', ' V ',' POL ',' W ',' Vf '
