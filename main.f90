@@ -55,7 +55,7 @@ IMPLICIT NONE
             IF (alpha==1.d0) THEN
               w(k) = LOG( c(i,j,k) )
             ELSE
-              w(k) = ( c(i,j,k)**(1.d0-alpha) -1 )/(1.d0-alpha)
+              w(k) = ( c(i,j,k)**(1.d0-alpha) - 1.d0 )/(1.d0-alpha)
             END IF
             w(k) = w(k) + beta*( pi*v(k,j) + (1.d0-pi)*v(k,ne0) )
           ELSE
