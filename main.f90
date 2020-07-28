@@ -82,7 +82,7 @@ IMPLICIT NONE
   j = 1 + b*i
   s(i+1) = a(j)
     DO k=1,m
-    v2(i+1,k) = v(j,ne0)
+    v2(i+1,k) = v(j,MIN(k,ne))
     END DO
   END DO
 
