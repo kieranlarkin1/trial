@@ -186,7 +186,6 @@ DO i=1,m
 dtau_int(:,i) = dtau(:,1)
 END DO
 
-end do
 ! Determine B, the RHS to the m system of equations and df, divided difference of
 ! function values.
 CALL SPRHS(dtau_int, r, m, fvals, indicator, SVEC, B, df)
