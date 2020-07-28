@@ -119,7 +119,7 @@ IMPLICIT NONE
   WRITE(*,*) ' iteration: ',t, ' tolerance: ', step
   WRITE(*,*) ' MA: beta, phi, theta= ', beta, phi, theta
   WRITE(*,*) ' V(0)= ', v0, v(1,ne0)
-  WRITE(*,*) ' Vf= ', v(na/2,ne0), Vf(:,nf/2)
+  WRITE(*,*) ' Vf= ', v(na/2,ne0), Vf(:,nf/2), Vf
 
   OPEN (UNIT=25, FILE="Output.txt", ACTION="WRITE")
 !  WRITE(25,*) ' A ', ' V ',' POL ',' W ',' Vf '
