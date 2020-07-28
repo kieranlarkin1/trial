@@ -19,7 +19,7 @@ IMPLICIT NONE
   REAL(rk) :: theta
   INTEGER:: ns2
   REAL(rk), ALLOCATABLE:: s(:), csV(:,:), L(:,:), U(:,:), dtau(:), &
-    v2(:,:), Sf(:), Vf(:,:), SVEC(:,:)
+    v2(:,:), Sf(:), Vf(:,:), SVEC(:,:), Vf_out(:,:)
   !beta = 0.9
 !  phi = 2.d0
   theta = 4.d0
@@ -73,7 +73,7 @@ IMPLICIT NONE
   ns2 = ns - 2
   ALLOCATE(s(ns), L(1, ns2-1), U(2, ns2), dtau(ns2+1))  ! Triangulation of knot points
   ALLOCATE(v2(ns,m),SVEC(2,m),csV(4,(ns2+1)*m))         ! V at knot points. Coefficients of spline
-  ALLOCATE(Sf(nf),Vf(order+1,nf*m))                     ! Evaluate spline function
+  ALLOCATE(Sf(nf),Vf(order+1,nf*m),Vf_out(nf,m))                     ! Evaluate spline function
 
   ! Select subset of nodes
 
@@ -100,6 +100,11 @@ IMPLICIT NONE
   ! Evaluate function value on nodes Sf: m functions
   CALL SPeval(csV, s, ns2, m, Sf, nf, order, Vf)
 
+  ! Reallocate Vf to similar form as value function
+  DO j=1,m
+  Vf_out(:,j) = Vf(1, (j-1)*nf+1:j*nf )
+  END DO
+
   WRITE(*,*) ' FINISHED! '
 !  WRITE(*,*) ' s, v2', s,v2
 !  WRITE(*,*) ' csv: ', csV
@@ -116,12 +121,14 @@ IMPLICIT NONE
 !    END DO
 !  -----------
    WRITE(25,*) a,';'
+   WRITE(25,*) pol(:,ne0),';'
+   WRITE(25,*) w,';'
    DO i=1,ne
    WRITE(25,*) v(:,i),';'
    END DO
-   WRITE(25,*) pol(:,ne0),';'
-   WRITE(25,*) w,';'
-   WRITE(25,*) Vf,';'
+   DO i=1,m
+   WRITE(25,*) Vf_out(:,i),';'
+   END DO
   CLOSE(25)
 
 
