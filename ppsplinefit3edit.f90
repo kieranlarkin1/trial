@@ -604,7 +604,7 @@ INTENT(OUT):: LMAT, UMAT, DTAUMAT
 
 rknotspoly = rknots - 1_ik; rknotsint = rknots - 2_ik
 
-IF (MIN(rknotsint) .LT. 2) THEN
+IF (MINVAL(rknotsint) .LT. 2) THEN
 WRITE(*,*) 'WARNING! Dimension of spline<4', rknots
 END IF
 
