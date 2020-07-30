@@ -4,6 +4,7 @@ PROGRAM main  !Program shell
  USE param
  USE mod_subrou
  USE ppsplinefit3edit
+ USE mod_space
 
 IMPLICIT NONE
 
@@ -31,12 +32,20 @@ IMPLICIT NONE
   theta = 4.d0
 
   WRITE(*,*) ' HELLO WORLD '
-  step = (mx_a-mn_a)/(na-1)
-  a = (/ (mn_a+i*step, i = 0, na-1) /)
-  step = (mx_e-mn_e)/(ne-1)
-  e = (/ (mn_e+i*step, i = 0, ne-1) /)
-  step = 2.d0*sigma_r/(ne-1)
-  risk = (/ (-sigma_r+i*step, i = 0, ne-1) /)
+  ! step = (mx_a-mn_a)/(na-1)
+  ! a = (/ (mn_a+i*step, i = 0, na-1) /)
+  ! step = (mx_e-mn_e)/(ne-1)
+  ! e = (/ (mn_e+i*step, i = 0, ne-1) /)
+  ! step = 2.d0*sigma_r/(ne-1)
+  ! risk = (/ (-sigma_r+i*step, i = 0, ne-1) /)
+
+  CALL linspace(mn_a, mx_a, na, a)
+  CALL linspace(mn_e, mx_e, ne, e)
+  CALL linspace(-sigma_r, sigma_r, ne, risk)
+
+  ! CALL logspace(mn_a, mx_a, na, a)
+  ! CALL logspace(mn_e, mx_e, ne, e)
+  ! CALL logspace(-sigma_r, sigma_r, ne, risk)
 
   v0 = log(omega+e(ne0))/(1-beta)
   v = 0.d0
@@ -157,10 +166,10 @@ IMPLICIT NONE
 
   WRITE(*,*) ' FINISHED! '
 !  WRITE(*,*) ' s: ', s
-  WRITE(*,*) ' e: ', e, s_e
+  WRITE(*,*) ' e: ', e
 !  WRITE(*,*) ' v2: ', v2
 !  WRITE(*,*) ' csv: ', csV
-!  WRITE(*,*) ' risk: ', risk
+  WRITE(*,*) ' risk: ', risk
   WRITE(*,*) ' iteration: ',t, ' tolerance: ', step
   WRITE(*,*) ' MA: beta, phi, theta= ', beta, phi, theta
   WRITE(*,*) ' V(0)= ', v0, v(1,ne0)
