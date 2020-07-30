@@ -7,8 +7,8 @@ PROGRAM main  !Program shell
 
 IMPLICIT NONE
 
-  INTEGER :: t,i,j,k,b
-  REAL(rk) :: step, v0
+  INTEGER :: t,i,j,k,o
+  REAL(rk) :: step, v0, b,bb
   REAL(rk), DIMENSION(na) :: a, w
   REAL(rk), DIMENSION(ne) :: e, risk
   REAL(rk), DIMENSION(na,ne) :: v, tv
@@ -20,6 +20,11 @@ IMPLICIT NONE
   INTEGER:: ns2
   REAL(rk), ALLOCATABLE:: s(:), csV(:,:), L(:,:), U(:,:), dtau(:), &
     v2(:,:), Sf(:), Vf(:,:), SVEC(:,:), Vf_out(:,:)
+
+  INTEGER(ik) :: clmat
+  REAL(rk), ALLOCATABLE :: v3(:,:), Vfm(:,:)
+  REAL(rk), ALLOCATABLE :: numelem(:,:), knots(:,:), LM(:,:), UM(:,:), dtaum(:,:,:), cV(:,:)
+
   !beta = 0.9
 !  phi = 2.d0
   theta = 4.d0
@@ -83,13 +88,18 @@ IMPLICIT NONE
   ALLOCATE(Sf(nf),Vf(order+1,nf*m),Vf_out(nf,m))        ! Evaluate spline function
 
   ! Select subset of nodes
-
-  b = (na-1)/(ns-1) ! Integer jump
+  b = (DBLE(na-1))/(DBLE(ns-1)) ! Integer jump
+  bb = (DBLE(ne-1))/(DBLE(m-1)) ! Integer jump
   DO i=0,ns-1
-  j = 1 + b*i
+  j = 1 + NINT(b*i)
   s(i+1) = a(j)
-    DO k=1,m
-    v2(i+1,k) = v(j,MIN(k,ne))
+    DO k=0,m-1
+      IF (i==0) THEN ! Store nodes
+      s_e(k+1)=e(o)   ! Note: Could be either e or risk
+!      s_e(k+1)=e(risk)
+      END IF
+    o = 1 + NINT(bb*k)
+    v2(i+1,k+1) = v(j,o)
     END DO
   END DO
 
@@ -113,6 +123,36 @@ IMPLICIT NONE
   Vf_out(:,j) = Vf(1, (j-1)*nf+1:j*nf )
   END DO
 
+  ! Fit multi-dimensional spline
+  ! ----------
+  ! MULTIVARIATE KNOT SETUP
+  ALLOCATE(numelem(4,md))
+  ! preliminary spline fit step, SPFitA computes knot dependent terms, numelem is always (4 x m).
+  CALL SPFitA0(md, ns_m, clmat, numelem)
+  ! clmat: largest dimension. numelem: spline coefficents dimensions
+  ALLOCATE(knots(clmat+2,md),LM(md, clmat), UM(2, clmat+1, md), dtaum(clmat+1, numelem(1,md), md), &
+  		 cV(4, numelem(3,md)) )
+  ALLOCATE( Vfm(na,ne) )
+
+  ! Knot points for multidimensional spline (just collect grids in each direction)
+  knots(1:ns_m(1),1)=s
+  knots(1:ns_m(2),2)=s_e
+
+  cV = 0.d0
+  ! first spline fit step: determine function independent LHS terms for slope solution
+  CALL SPFitA(md, ns_m, clmat, knots, numelem, LM, UM, dtaum)
+  ! Generate LU and dtau matricies for multidimensional spline.
+  CALL SPFitB(md, clmat, ns_m, numelem, LM, UM, dtaum, v2, cV)
+  ! Fit polynomial to splines. Generates Coefficients cV
+
+  ! Only evaluates one value at a time
+  DO i=1,na
+    DO j=1,ne
+    Vfm(i,j) = FastSplinEval(md, numelem(3,md), cV, ns_m-1, clmat+2, knots, &
+              (/a(i), e(j)/), order_m)
+   END DO
+ END DO
+
   WRITE(*,*) ' FINISHED! '
 !  WRITE(*,*) ' s: ', s
 !  WRITE(*,*) ' v2: ', v2
@@ -121,7 +161,7 @@ IMPLICIT NONE
   WRITE(*,*) ' iteration: ',t, ' tolerance: ', step
   WRITE(*,*) ' MA: beta, phi, theta= ', beta, phi, theta
   WRITE(*,*) ' V(0)= ', v0, v(1,ne0)
-  WRITE(*,*) ' Vf= ', v(na/2,1), Vf(:,nf/2)
+  WRITE(*,*) ' Vf= ', v(na/2,1), Vf_out(na/2,1),Vfm(na/2,1)
 !  WRITE(*,*) ' Vf= ', Vf
 
   OPEN (UNIT=25, FILE="Output.txt", ACTION="WRITE")
@@ -138,6 +178,9 @@ IMPLICIT NONE
    END DO
    DO i=1,m
    WRITE(25,*) Vf_out(:,i),';'
+   END DO
+   DO i=1,ne
+   WRITE(25,*) Vfm(:,i),';'
    END DO
   CLOSE(25)
 

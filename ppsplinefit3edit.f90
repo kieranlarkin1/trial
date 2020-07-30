@@ -535,7 +535,7 @@ END SUBROUTINE SPeval
 !				m		number of dimensions of the multivariate function
 !				rknots	vector of total knot points (interior knots + 2) in each dimension
 !				clmat	clmat + 2 is the largest number of knots in any dimension
-!				numelem	4 x m
+!				numelem	4 x m - dimensions of matrices of spline coefficients
 
 SUBROUTINE SPFitA0(m, rknots, clmat, numelem)
 
@@ -579,6 +579,9 @@ END SUBROUTINE SPFitA0
 ! divided differences, are also produced and, for each dimension, stored in DTAUMAT.  This
 ! subroutine is required only once for any set of functions defined upon the same knot
 ! product.
+
+! numelem and clmat produced by SPFitA0, which is run prior
+! knots: block of grid points, same in each dim. Will have missing elements if rknots(m)<clmat
 
 ! Dimensions
 !
@@ -669,6 +672,7 @@ END SUBROUTINE SPFitA
 !                                                             simply rknots(1) x numelem(1,1).
 !				ctemp	(4 x numelem(3,m))
 
+! if m>2. In dimension 2 of F0, rknotst(2) on outer loop. rknots(m) inner loop
 
 SUBROUTINE SPFitB(m, c1mat, rknots, numelem, LMAT, UMAT, DTAUMAT, F0, ctemp)
 
