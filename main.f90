@@ -96,11 +96,11 @@ IMPLICIT NONE
   j = 1 + NINT(b*i)
   s(i+1) = a(j)
     DO k=0,m-1
+    o = 1 + NINT(bb*k)
       IF (i==0) THEN ! Store nodes
       s_e(k+1)=e(o)   ! Note: Could be either e or risk
 !      s_e(k+1)=e(risk)
       END IF
-    o = 1 + NINT(bb*k)
     v2(i+1,k+1) = v(j,o)
     END DO
   END DO
