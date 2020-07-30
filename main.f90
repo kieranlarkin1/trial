@@ -130,18 +130,19 @@ IMPLICIT NONE
   ALLOCATE(numelem(4,md))
   ! preliminary spline fit step, SPFitA computes knot dependent terms, numelem is always (4 x m).
   CALL SPFitA0(md, ns_m, clmat, numelem)
-      WRITE(*,*) ' 2: '  ! clmat: largest dimension. numelem: spline coefficents dimensions
+      WRITE(*,*) ' 2: ', clmat, numelem  ! clmat: largest dimension. numelem: spline coefficents dimensions
   ALLOCATE(knots(clmat+2,md),LM(md, clmat), UM(2, clmat+1, md), dtaum(clmat+1, numelem(1,md), md), &
   		 cV(4, numelem(3,md)) )
 
   ALLOCATE( Vfm(na,ne) )
 
   ! Knot points for multidimensional spline (just collect grids in each direction)
+  knots = 0.d0
   knots(1:ns_m(1),1)=s
   knots(1:ns_m(2),2)=s_e
 
   cV = 0.d0
-        WRITE(*,*) ' 2.5: '
+        WRITE(*,*) ' 2.5: ', knots
   ! first spline fit step: determine function independent LHS terms for slope solution
   CALL SPFitA(md, ns_m, clmat, knots, numelem, LM, UM, dtaum)
   ! Generate LU and dtau matricies for multidimensional spline.
