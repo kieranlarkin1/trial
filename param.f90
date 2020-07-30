@@ -29,7 +29,7 @@ IMPLICIT NONE
 
 !    REAL(rk), PARAMETER :: phi = 1.d0
 
-! Spline parameters
+! Spline parametersá
   INTEGER(ik), PARAMETER :: ns=25                    ! total number of knots, including endpoints, on S
   CHARACTER(30), PARAMETER :: indicator = "not-a-knot"  ! complete or natural spline endpoint condition
   INTEGER(ik), PARAMETER :: m=3                     ! Number of functions to evaluate.
@@ -41,7 +41,7 @@ IMPLICIT NONE
   INTEGER(ik), PARAMETER :: md = 2                 ! Number of dimesions
 !  INTEGER(ik), PARAMETER :: nw = 3                 ! Number of knots in 2nd dimension to evaluate
   INTEGER(ik), DIMENSION(md), PARAMETER :: ns_m = (/ ns, m /)
-  INTEGER(ik), DIMENSION(md), PARAMETER :: order_m= (/ 0,0 /)              ! 0: value, 1: first derivative, 2: 2nd derivative
+  INTEGER(ik), DIMENSION(md), PARAMETER :: order_m= (/ 0, 0 /)              ! 0: value, 1: first derivative, 2: 2nd derivative
 
 
 END MODULE param

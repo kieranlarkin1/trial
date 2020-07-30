@@ -22,8 +22,9 @@ IMPLICIT NONE
     v2(:,:), Sf(:), Vf(:,:), SVEC(:,:), Vf_out(:,:)
 
   INTEGER(ik) :: clmat
-  REAL(rk), ALLOCATABLE :: Vfm(:,:), knots(:,:) ! knots is as many dimesions and dimensions of function. Vfm stays (:,:)
-  REAL(rk), ALLOCATABLE :: numelem(:,:), LM(:,:), UM(:,:,:), dtaum(:,:,:), cV(:,:) ! These stay same regardless of dimension
+  REAL(rk), ALLOCATABLE :: s_e(:), Vfm(:,:), knots(:,:) ! knots is as many dimesions and dimensions of function. Vfm stays (:,:)
+  INTEGER(ik), ALLOCATABLE :: numelem(:,:)
+  REAL(rk), ALLOCATABLE :: LM(:,:), UM(:,:,:), dtaum(:,:,:), cV(:,:) ! These stay same regardless of dimension
 
   !beta = 0.9
 !  phi = 2.d0
@@ -86,6 +87,7 @@ IMPLICIT NONE
   ALLOCATE(s(ns), L(1, ns2-1), U(2, ns2), dtau(ns2+1))  ! Triangulation of knot points
   ALLOCATE(v2(ns,m),SVEC(2,m),csV(4,(ns2+1)*m))         ! V at knot points. Coefficients of spline
   ALLOCATE(Sf(nf),Vf(order+1,nf*m),Vf_out(nf,m))        ! Evaluate spline function
+  ALLOCATE(s_e(m))                                      ! Multidimensional spline
 
   ! Select subset of nodes
   b = (DBLE(na-1))/(DBLE(ns-1)) ! Integer jump
