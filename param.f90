@@ -21,7 +21,7 @@ IMPLICIT NONE
     REAL(rk), PARAMETER :: mn_e = 0.d0
     REAL(rk), PARAMETER :: mx_e = 0.25d0
     INTEGER(ik), PARAMETER :: ne0 = ne/2 + 1              ! mean income level
-    REAL(rk), PARAMETER :: sigma_r = 2.d-2
+    REAL(rk), PARAMETER :: sigma_r = 0.d0 !2.d-2
 
 
     INTEGER(ik), PARAMETER :: mx_it = 10000
@@ -30,7 +30,7 @@ IMPLICIT NONE
 !    REAL(rk), PARAMETER :: phi = 1.d0
 
 ! Spline parametersá
-  INTEGER(ik), PARAMETER :: ns=25                    ! total number of knots, including endpoints, on S
+  INTEGER(ik), PARAMETER :: ns=15                   ! total number of knots, including endpoints, on S
   CHARACTER(30), PARAMETER :: indicator = "not-a-knot"  ! complete or natural spline endpoint condition
   INTEGER(ik), PARAMETER :: m=5                    ! Number of functions to evaluate.
 

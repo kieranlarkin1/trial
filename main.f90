@@ -123,14 +123,12 @@ IMPLICIT NONE
   DO j=1,m
   Vf_out(:,j) = Vf(1, (j-1)*nf+1:j*nf )
   END DO
-    WRITE(*,*) ' 1: '
   ! Fit multi-dimensional spline
   ! ----------
   ! MULTIVARIATE KNOT SETUP
   ALLOCATE(numelem(4,md))
   ! preliminary spline fit step, SPFitA computes knot dependent terms, numelem is always (4 x m).
   CALL SPFitA0(md, ns_m, clmat, numelem)
-      WRITE(*,*) ' 2: ', clmat, numelem  ! clmat: largest dimension. numelem: spline coefficents dimensions
   ALLOCATE(knots(clmat+2,md),LM(md, clmat), UM(2, clmat+1, md), dtaum(clmat+1, numelem(1,md), md), &
   		 cV(4, numelem(3,md)) )
 
@@ -142,13 +140,10 @@ IMPLICIT NONE
   knots(1:ns_m(2),2)=s_e
 
   cV = 0.d0
-        WRITE(*,*) ' 2.5: ', knots
   ! first spline fit step: determine function independent LHS terms for slope solution
   CALL SPFitA(md, ns_m, clmat, knots, numelem, LM, UM, dtaum)
   ! Generate LU and dtau matricies for multidimensional spline.
-      WRITE(*,*) ' 3: '
   CALL SPFitB(md, clmat, ns_m, numelem, LM, UM, dtaum, v2, cV)
-      WRITE(*,*) ' 4: '
   ! Fit polynomial to splines. Generates Coefficients cV
 
   ! Only evaluates one value at a time
@@ -162,6 +157,7 @@ IMPLICIT NONE
 
   WRITE(*,*) ' FINISHED! '
 !  WRITE(*,*) ' s: ', s
+  WRITE(*,*) ' e: ', e, s_e
 !  WRITE(*,*) ' v2: ', v2
 !  WRITE(*,*) ' csv: ', csV
 !  WRITE(*,*) ' risk: ', risk
