@@ -141,6 +141,7 @@ IMPLICIT NONE
   knots(1:ns_m(2),2)=s_e
 
   cV = 0.d0
+        WRITE(*,*) ' 2.5: '
   ! first spline fit step: determine function independent LHS terms for slope solution
   CALL SPFitA(md, ns_m, clmat, knots, numelem, LM, UM, dtaum)
   ! Generate LU and dtau matricies for multidimensional spline.
