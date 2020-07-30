@@ -40,8 +40,8 @@ IMPLICIT NONE
 ! Multidimensional spline
   INTEGER(ik), PARAMETER :: md = 2                 ! Number of dimesions
 !  INTEGER(ik), PARAMETER :: nw = 3                 ! Number of knots in 2nd dimension to evaluate
-  INTEGER(ik), DIMENSION(md), PARAMETER :: ns_m = (\ ns, m \)
-  INTEGER(ik), DIMENSION(md), PARAMETER :: order_m= (\0,0\)              ! 0: value, 1: first derivative, 2: 2nd derivative
+  INTEGER(ik), DIMENSION(md), PARAMETER :: ns_m = (/ ns, m /)
+  INTEGER(ik), DIMENSION(md), PARAMETER :: order_m= (/ 0,0 /)              ! 0: value, 1: first derivative, 2: 2nd derivative
 
 
 END MODULE param
