@@ -22,8 +22,8 @@ IMPLICIT NONE
     v2(:,:), Sf(:), Vf(:,:), SVEC(:,:), Vf_out(:,:)
 
   INTEGER(ik) :: clmat
-  REAL(rk), ALLOCATABLE :: v3(:,:), Vfm(:,:)
-  REAL(rk), ALLOCATABLE :: numelem(:,:), knots(:,:), LM(:,:), UM(:,:), dtaum(:,:,:), cV(:,:)
+  REAL(rk), ALLOCATABLE :: Vfm(:,:), knots(:,:) ! knots is as many dimesions and dimensions of function. Vfm stays (:,:)
+  REAL(rk), ALLOCATABLE :: numelem(:,:), LM(:,:), UM(:,:,:), dtaum(:,:,:), cV(:,:) ! These stay same regardless of dimension
 
   !beta = 0.9
 !  phi = 2.d0
