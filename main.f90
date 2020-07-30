@@ -116,7 +116,6 @@ IMPLICIT NONE
   CALL SPLHS(s, ns2, indicator, L, U, dtau)
   ! Fit a spline to update polynomial approximations V - Find coefficient csV
   CALL SPpp(v2, ns2, m, L, U, dtau, indicator, SVEC, csV)
-    WRITE(*,*) ' csv: ', csV
   ! Evaluate function value on nodes Sf: m functions
   CALL SPeval(csV, s, ns2, m, Sf, nf, order, Vf)
 
@@ -124,16 +123,17 @@ IMPLICIT NONE
   DO j=1,m
   Vf_out(:,j) = Vf(1, (j-1)*nf+1:j*nf )
   END DO
-
+    WRITE(*,*) ' 1: '
   ! Fit multi-dimensional spline
   ! ----------
   ! MULTIVARIATE KNOT SETUP
   ALLOCATE(numelem(4,md))
   ! preliminary spline fit step, SPFitA computes knot dependent terms, numelem is always (4 x m).
   CALL SPFitA0(md, ns_m, clmat, numelem)
-  ! clmat: largest dimension. numelem: spline coefficents dimensions
+      WRITE(*,*) ' 2: '  ! clmat: largest dimension. numelem: spline coefficents dimensions
   ALLOCATE(knots(clmat+2,md),LM(md, clmat), UM(2, clmat+1, md), dtaum(clmat+1, numelem(1,md), md), &
   		 cV(4, numelem(3,md)) )
+
   ALLOCATE( Vfm(na,ne) )
 
   ! Knot points for multidimensional spline (just collect grids in each direction)
@@ -144,7 +144,9 @@ IMPLICIT NONE
   ! first spline fit step: determine function independent LHS terms for slope solution
   CALL SPFitA(md, ns_m, clmat, knots, numelem, LM, UM, dtaum)
   ! Generate LU and dtau matricies for multidimensional spline.
+      WRITE(*,*) ' 3: '
   CALL SPFitB(md, clmat, ns_m, numelem, LM, UM, dtaum, v2, cV)
+      WRITE(*,*) ' 4: '
   ! Fit polynomial to splines. Generates Coefficients cV
 
   ! Only evaluates one value at a time
@@ -154,6 +156,7 @@ IMPLICIT NONE
               (/a(i), e(j)/), order_m)
    END DO
  END DO
+     WRITE(*,*) ' 5: '
 
   WRITE(*,*) ' FINISHED! '
 !  WRITE(*,*) ' s: ', s
