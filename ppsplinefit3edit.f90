@@ -600,6 +600,8 @@ CHARACTER(20):: indicator
 INTENT(IN):: rknots, m, knots, clmat, numelem
 INTENT(OUT):: LMAT, UMAT, DTAUMAT
 
+    WRITE(*,*) ' 1 SPFITA: '
+
 rknotspoly = rknots - 1_ik; rknotsint = rknots - 2_ik
 
 ! Not-a-knot endpoint condition
@@ -616,13 +618,13 @@ r = rknotsint(1)
 ALLOCATE(L0(1, r-1), U0(2, r), dtau(r+1,1), dtau0(r+1,numelem(1,1)))
 
 CALL SPLHS(knots(1:rknots(1),1), r, indicator, L0, U0, dtau)
-
+    WRITE(*,*) ' 2 SPFITA: '
 FORALL (vars = 1:numelem(1,1)) dtau0(:,vars) = dtau(:,1)
 
 LMAT(1,1:rknotsint(1) - 1) = L0(1,:)
 UMAT(1:2, 1:rknotsint(1),1) = U0
 DTAUMAT(1:rknotspoly(1), 1:numelem(1,1),1) = dtau0
-
+    WRITE(*,*) ' 3 SPFITA: '
 ! Repeat the above procedure for each additional dimension, recording all
 ! matrices in LMAT, UMAT and DTAUMAT.
 DEALLOCATE(L0, U0, dtau, dtau0)
@@ -637,7 +639,7 @@ DO i = 2, m, 1
 	UMAT(1:2, 1:rknotsint(i),i) = U0(:,:)
 	DTAUMAT(1:rknotspoly(i), 1:numelem(1,i),i) = dtau0
 	DEALLOCATE(L0, U0, dtau, dtau0)
-
+      WRITE(*,*) ' 4 SPFITA: ', i
 END DO
 
 END SUBROUTINE SPFitA
