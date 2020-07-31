@@ -47,6 +47,7 @@ IMPLICIT NONE
    CALL logspace(mn_e+1.d-1, mx_e+1.d-1, ne, e)
    e = e-1.d-1
   ! CALL logspace(-sigma_r, sigma_r, ne, risk)
+  ne0 = MINLOC(ABS(e-(mx_e+mn_e)/2.d0), 1)
 
   v0 = log(omega+e(ne0))/(1-beta)
   v = 0.d0
