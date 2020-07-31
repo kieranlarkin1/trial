@@ -44,8 +44,8 @@ IMPLICIT NONE
   CALL linspace(-sigma_r, sigma_r, ne, risk)
 
    CALL logspace(mn_a, mx_a, na, a)
-   CALL logspace(mn_e+1.d-1, mx_e+1.d-1, ne, e)
-   e = e-1.d-1
+   CALL logspace(mn_e+1.d-2, mx_e+1.d-2, ne, e)
+   e = e-1.d-2
   ! CALL logspace(-sigma_r, sigma_r, ne, risk)
   ne0 = MINLOC(ABS(e-(mx_e+mn_e)/2.d0), 1)
 
