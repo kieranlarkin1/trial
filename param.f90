@@ -14,11 +14,11 @@ IMPLICIT NONE
     REAL(rk), PARAMETER :: vmin = -1.d10
 
     INTEGER(ik), PARAMETER :: na = 100
-    REAL(rk), PARAMETER :: mn_a = 0.d0
+    REAL(rk), PARAMETER :: mn_a = 1.d-5
     REAL(rk), PARAMETER :: mx_a = 10.d0
 
     INTEGER(ik), PARAMETER :: ne = 15
-    REAL(rk), PARAMETER :: mn_e = 0.d0
+    REAL(rk), PARAMETER :: mn_e = 1.d-5
     REAL(rk), PARAMETER :: mx_e = 0.25d0
     INTEGER(ik), PARAMETER :: ne0 = ne/2 + 1              ! mean income level
     REAL(rk), PARAMETER :: sigma_r = 0.d0 !2.d-2
