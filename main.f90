@@ -40,11 +40,12 @@ IMPLICIT NONE
   ! risk = (/ (-sigma_r+i*step, i = 0, ne-1) /)
 
 !  CALL linspace(mn_a, mx_a, na, a)
-  CALL linspace(mn_e, mx_e, ne, e)
+!  CALL linspace(mn_e, mx_e, ne, e)
   CALL linspace(-sigma_r, sigma_r, ne, risk)
 
    CALL logspace(mn_a, mx_a, na, a)
-!   CALL logspace(mn_e, mx_e, ne, e)
+   CALL logspace(mn_e+1.d0, mx_e+1.d0, ne, e)
+   e = e-1
   ! CALL logspace(-sigma_r, sigma_r, ne, risk)
 
   v0 = log(omega+e(ne0))/(1-beta)
