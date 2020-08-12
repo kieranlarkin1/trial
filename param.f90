@@ -4,7 +4,7 @@ USE kindset
 
 IMPLICIT NONE
 
-    REAL(rk), PARAMETER :: alpha=2.d0       !elasticity of substitution
+    REAL(rk), PARAMETER :: alpha=3.d0       !elasticity of substitution
     REAL(rk), PARAMETER :: beta=0.9d0
     REAL(rk), PARAMETER :: r=0.01d0
 
