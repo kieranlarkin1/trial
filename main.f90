@@ -173,7 +173,8 @@ IMPLICIT NONE
 !  WRITE(*,*) ' csv: ', csV
   WRITE(*,*) ' risk: ', risk
   WRITE(*,*) ' iteration: ',t, ' tolerance: ', step
-  WRITE(*,*) ' MA: beta, phi, theta= ', beta, phi, theta
+  WRITE(*,*) ' MA: alpha, beta, phi, theta, r= ', alpha, beta, phi, theta, r
+  WRITE(*,*) ' MA: omega, pi: ', omega, pi
   WRITE(*,*) ' V(0)= ', v0, v(1,ne0)
   WRITE(*,*) ' Vf= ', v(na/2,1), Vf_out(na/2,1),Vfm(na/2,1)
 !  WRITE(*,*) ' Vf= ', Vf
